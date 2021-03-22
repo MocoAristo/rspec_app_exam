@@ -65,7 +65,7 @@ RSpec.describe 'Task', type: :system do
         fill_in 'Deadline', with: Time.current
         click_button 'Update Task'
         click_link 'Back'
-        expect(page).to have_content(short_time(Time.current))
+        expect(find('.task_list')).to have_content(short_time(Time.current))
         expect(current_path).to eq project_tasks_path(project)
       end
 
@@ -101,7 +101,7 @@ RSpec.describe 'Task', type: :system do
         page.driver.browser.switch_to.alert.accept
         sleep 0.5
         expect(Task.count).to eq(0)
-        expect('.taks_list').not_to have_content(task.title)
+        expect('.task_list').not_to have_content(task.title)
         expect(current_path).to eq project_tasks_path(project)
       end
     end
